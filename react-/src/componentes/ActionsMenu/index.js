@@ -1,36 +1,27 @@
-import React from "react";
-import './actionsMenu.css'
+import "./actionsMenu.css";
+import Alert from "../Alert";
+import React, { useState } from "react";
 
-function ActionMenu ()
-{
-    return (
-        
-        <div className="actions-menu">
-          <h1>Mascotas</h1>
-          <div className="actions-menu-content">
-            <button
-              type="button"
-              className="btn btn-primary"
-              data-toggle="modal"
-              data-target="#exampleModalCenter"
-            >
-              Nuevo
-            </button>
-            <div className="alert alert-danger alert-dismissible" role="alert">
-              <strong>Oops!</strong> Algo hicimos mal, por favor vuelve a
-              intentarlo!.
-              <button
-                type="button"
-                className="close"
-                data-dismiss="alert"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-          </div>
-        </div>
-    )
+function ActionMenu() {
+  const [mostrarAlerta, setMostrarAlerta] = useState(false);
+  const alertSwitch = () => setMostrarAlerta(!mostrarAlerta)
+  return (
+    <div className="actions-menu">
+      <h1>Mascotas</h1>
+      <div className="actions-menu-content">
+        <button
+          type="button"
+          className="btn btn-primary"
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+          onClick={alertSwitch}
+        >
+          Nuevo
+        </button>
+        {mostrarAlerta && <Alert alertSwitch={alertSwitch} />}
+      </div>
+    </div>
+  );
 }
 
-export default ActionMenu
+export default ActionMenu;
