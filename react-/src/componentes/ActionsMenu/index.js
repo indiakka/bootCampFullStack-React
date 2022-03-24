@@ -1,4 +1,4 @@
-import "./actionsMenu.css";
+import "./ActionsMenu.css";
 import Alert from "../Alert";
 import React, { useState } from "react";
 

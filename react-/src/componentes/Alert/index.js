@@ -1,5 +1,5 @@
 import React from "react";
-import './alert.css'
+import './Alert.css'
 
 function Alert ( props )
 {
