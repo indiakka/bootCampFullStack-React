@@ -1,10 +1,10 @@
 import React from "react";
 import classNames from "classnames";
-import { FontAwesomeICon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
-import "./Botonaccion.css";
+import "./BotonAccion.css";
 
-function BotonAccion({ tipo }) {
+function BotonAccion({ tipo, onClick = () => {}, index = "" }) {
   return (
     <button
       type="button"
@@ -12,10 +12,12 @@ function BotonAccion({ tipo }) {
         "btn-info": tipo === "editar",
         "btn-danger": tipo === "eliminar",
       })}
+      onClick={(e) => onClick(e, index)}
     >
-      {tipo === "editar" && <FontAwesomeICon icon={faEdit} />}
-      {tipo === "eliminar" && <FontAwesomeICon icon={faTrashAlt} />}
+      {tipo === "editar" && <FontAwesomeIcon icon={faEdit} />}
+      {tipo === "eliminar" && <FontAwesomeIcon icon={faTrashAlt} />}
     </button>
   );
 }
+
 export default BotonAccion;
