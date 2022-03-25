@@ -24,7 +24,7 @@ class Pagina extends Component() {
           <Nav />
           <ActionMenu cambiarModal={this.cambiarModal} />
           <Tabla />
-          {this.state.mostarModal && <Modal />}
+          {this.state.mostarModal && <Modal cambiarModal={this.cambiarModal} />}
         </div>
       </>
     );
