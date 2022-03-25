@@ -15,14 +15,15 @@ class Pagina extends Component() {
   };
   // código del componente
 
-  // render debe ir el último
+  // render siempre debe ir el último
   render() {
     //render = interpreta el código para mostrar
+    const { titulo = "Página sin título" } = this.props;
     return (
       <>
         <div className="container">
           <Nav />
-          <ActionMenu cambiarModal={this.cambiarModal} />
+          <ActionMenu cambiarModal={this.cambiarModal} titulo={titulo} />
           <Tabla />
           {this.state.mostarModal && <Modal cambiarModal={this.cambiarModal} />}
         </div>
