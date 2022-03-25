@@ -1,8 +1,6 @@
 import React from "react";
 import ModalHeader from "./ModalHeader";
 import ModalFooter from "./ModalFooter";
-import Select from "..Select";
-import Input from "../Input";
 import "./Modal.css";
 
 function Modal({
@@ -18,19 +16,7 @@ function Modal({
             <ModalHeader cambiarModal={cambiarModal} />
             <div className="modal-body">
               <form id="form">
-                <div className="form-row">
-                  <div className="col">
-                    <Select options={tiposMascota} nombreCampo="Tipo animal" />
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="col">
-                    <Input tipo="text" nombreCampo="nombre" />
-                  </div>
-                  <div className="col">
-                    <Select options={duenos} nombreCampo="dueño" />
-                  </div>
-                </div>
+                <div className="form-row">{children}</div>
               </form>
             </div>
             <ModalFooter
