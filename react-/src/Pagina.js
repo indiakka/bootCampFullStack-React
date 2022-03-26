@@ -3,12 +3,16 @@ import Nav from "./componentes/Nav";
 import ActionMenu from "./componentes/ActionsMenu";
 import Tabla from "./componentes/Tabla";
 import Modal from "./componentes/Modal";
-import { listarEntidad } from "./servicio";
+import { listarEntidad, crearEditarEntidad } from "./servicio";
 
 class Pagina extends Component() {
   constructor(props) {
     super(props); //llama a todos los métodos del componente
-    this.state = { mostarModal: false, entidades: [] };
+    this.state = {
+      mostarModal: false,
+      entidades: [],
+      objeto: {},
+    };
   }
 
   cambiarModal = () => {
@@ -21,34 +25,26 @@ class Pagina extends Component() {
     this.setState({ entidades });
   };
 
-  componentDidMount() {
-    debugger;
+  manejarInput = (evento) => {
+    const {
+      target: { value, name },
+    } = evento;
+    let { objeto } = this.state.objeto;
+    objeto = { ...objeto, [name]: value };
+    this.setState({ objeto });
+  }; //... copia de objeto del constructor
+
+  crearEntidad = async () => {
+    const { entidad } = this.props;
+    let { objeto } = this.state;
+    const method = "POST";
+     await crearEditarEntidad({ entidad, objeto, method });
+   this.cambiarModal()
     this.listar();
-  }
+  };
 
-  componentWillMount() {
-    debugger;
-  }
-
-  componentWillReciveProps() {
-    debugger;
-  }
-
-  shouldComponentUpdate() {
-    debugger;
-    return true;
-  }
-
-  componentWillUpdate() {
-    debugger;
-  }
-
-  componentDidUpdate() {
-    debugger;
-  }
-
-  componentWillUnmount() {
-    debugger;
+  componentDidMount() {
+    this.listar();
   }
 
   // código del componente
@@ -63,7 +59,13 @@ class Pagina extends Component() {
           <Nav />
           <ActionMenu cambiarModal={this.cambiarModal} titulo={titulo} />
           <Tabla entidades={this.state.entidades} />
-          {this.state.mostarModal && <Modal cambiarModal={this.cambiarModal} />}
+          {this.state.mostarModal && (
+            <Modal
+              cambiarModal={this.cambiarModal}
+              manejarInput={this.manejarInput}
+              crearEntidad={this.crearEntidad}
+            />
+          )}
         </div>
       </>
     );

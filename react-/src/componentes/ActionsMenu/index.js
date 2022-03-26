@@ -1,7 +1,11 @@
 import React from "react";
 import "./ActionsMenu.css";
 
-function ActionMenu({cambiarModal = () => {}, titulo}) {
+function ActionMenu ( {
+  cambiarModal = () => { },
+  titulo,
+} )
+{
   return (
     <div className="actions-menu">
       <h1>{titulo}</h1>

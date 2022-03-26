@@ -1,17 +1,22 @@
-import React from 'react'
-import './Input.css'
+import React from "react";
+import "./Input.css";
 
-function Input ({tipo= 'text', nombreCampo})
+function Input ( {
+  tipo = "text",
+  nombreCampo,
+  onInput = () => { },
+  placeholder,
+} )
 {
-    return (
-      <input
-        type={tipo}
-        id={nombreCampo}
-        name={nombreCampo}
-        class="form-control"
-        placeholder={nombreCampo}
-      />
-    );
+  return (
+    <input //input de html
+      type={tipo}
+      name={nombreCampo}
+      class="form-control"
+      placeholder={placeholder}
+      onInput={onInput} //input de js
+    />
+  );
 }
 
-export default Input
+export default Input;
