@@ -15,23 +15,54 @@ class Pagina extends Component() {
     this.setState({ mostarModal: !this.state.mostarModal });
   };
 
-  listar = async() =>
-  {
-    const entidades = await listarEntidad()
-  this.setState({entidades})
+  listar = async () => {
+    const { entidad } = this.props;
+    const entidades = await listarEntidad({ entidad });
+    this.setState({ entidades });
   };
+
+  componentDidMount() {
+    debugger;
+    this.listar();
+  }
+
+  componentWillMount() {
+    debugger;
+  }
+
+  componentWillReciveProps() {
+    debugger;
+  }
+
+  shouldComponentUpdate() {
+    debugger;
+    return true;
+  }
+
+  componentWillUpdate() {
+    debugger;
+  }
+
+  componentDidUpdate() {
+    debugger;
+  }
+
+  componentWillUnmount() {
+    debugger;
+  }
+
   // código del componente
 
   // render siempre debe ir el último
+  //render = interpreta el código para mostrar
   render() {
-    //render = interpreta el código para mostrar
     const { titulo = "Página sin título" } = this.props;
     return (
       <>
         <div className="container">
           <Nav />
           <ActionMenu cambiarModal={this.cambiarModal} titulo={titulo} />
-          <Tabla />
+          <Tabla entidades={this.state.entidades} />
           {this.state.mostarModal && <Modal cambiarModal={this.cambiarModal} />}
         </div>
       </>
