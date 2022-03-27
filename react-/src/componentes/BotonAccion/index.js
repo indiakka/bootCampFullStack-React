@@ -1,5 +1,5 @@
 import React from "react";
-import classNames from "classnames";
+import classNames from "classNames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import "./BotonAccion.css";

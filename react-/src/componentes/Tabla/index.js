@@ -21,6 +21,7 @@ function Tabla({
             index={index}
             editarEntidad={editarEntidad}
             eliminarEntidad={eliminarEntidad}
+          columnas={columnas}
           />
         ))}
       </tbody>

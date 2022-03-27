@@ -13,27 +13,21 @@ function App() {
         <Route
           exact
           path="/"
-          component={() => 
-            <Pagina  titulo="Mascotas" entidad="mascotas" />
-          }
+          element={() => <Pagina titulo="Mascotas" entidad="mascotas" />}
         />
         <Route
           path="/veterinarias"
-          component={() => (
+          element={() => (
             <Pagina titulo="Veterinari@s" entidad="veterinarias" />
           )}
         />
         <Route
           path="/duenos"
-          component={() => 
-            <Pagina  titulo="Dueñ@s" entidad="duenos" />
-          }
+          element={() => <Pagina titulo="Dueñ@s" entidad="duenos" />}
         />
         <Route
           path="/consultas"
-          component={() => 
-            <Pagina  titulo="Consultas" entidad="consultas" />
-          }
+          element={() => <Pagina titulo="Consultas" entidad="consultas" />}
         />
       </Routes>
     </div>
