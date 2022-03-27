@@ -3,7 +3,21 @@ import ActionMenu from "./componentes/ActionsMenu";
 import Tabla from "./componentes/Tabla";
 import Modal from "./componentes/Modal";
 import { listarEntidad, crearEditarEntidad, eliminarEntidad } from "./servicio";
+import Select from "./componentes/Select";
+import Input from "./componentes/Input";
 //import ComponenteCampo from "./componentes/ComponenteCampo";
+
+const ComponenteCampo = {
+  tipo: Select,
+  nombre: Input,
+  dueno: Input,
+  apellido: Input,
+  dni: Input,
+  mascota: Select,
+  veterinaria: Select,
+  historia: Input,
+  diagnostico: Select
+};
 
 class Pagina extends Component {
   constructor(props) {
@@ -73,6 +87,7 @@ class Pagina extends Component {
   //render = interpreta el código para mostrar
   render() {
     const { titulo = "Página sin título" } = this.props;
+    const { columnas } = this.state;
     return (
       <>
         <div className="container">
@@ -81,7 +96,7 @@ class Pagina extends Component {
             entidades={this.state.entidades}
             editarEntidad={this.editarEntidad}
             eliminarEntidad={this.eliminarEntidad}
-            columnas={this.state.columnas}
+            columnas={this.columnas}
           />
           {this.state.mostarModal && (
             <Modal
@@ -89,7 +104,13 @@ class Pagina extends Component {
               manejarInput={this.manejarInput}
               crearEntidad={this.crearEntidad}
               objeto={this.state.objeto}
-            />
+            >
+              {columnas.map( ( columna, index ) =>
+              {
+                const Componente = ComponenteCampo[ columna ]
+                return <Componente />
+              })}
+            </Modal>
           )}
         </div>
       </>

@@ -13,6 +13,7 @@ function Modal({
   manejarInput = () => {},
   crearEntidad = () => {},
   objeto = {},
+  children = []
 }) {
   return (
     <>
