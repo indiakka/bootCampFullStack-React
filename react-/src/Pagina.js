@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Nav from "./componentes/Nav";
 import ActionMenu from "./componentes/ActionsMenu";
 import Tabla from "./componentes/Tabla";
 import Modal from "./componentes/Modal";
@@ -72,7 +71,7 @@ class Pagina extends Component {
     return (
       <>
         <div className="container">
-          <Nav />
+          
           <ActionMenu cambiarModal={this.cambiarModal} titulo={titulo} />
           <Tabla
             entidades={this.state.entidades}
