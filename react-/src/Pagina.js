@@ -14,6 +14,7 @@ class Pagina extends Component {
       objeto: {},
       idObjeto: null,
       method: "POST",
+      columnas: [],
     };
   }
 
@@ -24,7 +25,11 @@ class Pagina extends Component {
   listar = async () => {
     const { entidad } = this.props;
     const entidades = await listarEntidad({ entidad });
-    this.setState({ entidades });
+    let columnas = [];
+    if (Array.isArray(entidades) && entidades.length > 0) {
+      columnas = Object.keys(entidades[0]) || [];
+    }
+    this.setState({ entidades, columnas });
   };
 
   manejarInput = (evento) => {
@@ -71,12 +76,12 @@ class Pagina extends Component {
     return (
       <>
         <div className="container">
-          
           <ActionMenu cambiarModal={this.cambiarModal} titulo={titulo} />
           <Tabla
             entidades={this.state.entidades}
             editarEntidad={this.editarEntidad}
             eliminarEntidad={this.eliminarEntidad}
+            columnas={this.state.columnas}
           />
           {this.state.mostarModal && (
             <Modal

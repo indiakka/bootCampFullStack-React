@@ -10,18 +10,31 @@ function App() {
     <div className="container">
       <Nav />
       <Routes>
-        <Route exact path="/">
-          <Pagina titulo="Mascotas" entidad="mascotas" />
-        </Route>
-        <Route path="/veterinarias">
-          <Pagina titulo="Veterinari@s" entidad="veterinarias" />
-        </Route>
-        <Route path="/duenos">
-          <Pagina titulo="Dueñ@s" entidad="duenos" />
-        </Route>
-        <Route path="/consultas">
-          <Pagina titulo="Consultas" entidad="consultas" />
-        </Route>
+        <Route
+          exact
+          path="/"
+          component={(props) => (
+            <Pagina {...props} titulo="Mascotas" entidad="mascotas" />
+          )}
+        />
+        <Route
+          path="/veterinarias"
+          component={(props) => (
+            <Pagina {...props} titulo="Veterinari@s" entidad="veterinarias" />
+          )}
+        />
+        <Route
+          path="/duenos"
+          component={(props) => (
+            <Pagina {...props} titulo="Dueñ@s" entidad="duenos" />
+          )}
+        />
+        <Route
+          path="/consultas"
+          component={(props) => (
+            <Pagina {...props} titulo="Consultas" entidad="consultas" />
+          )}
+        />
       </Routes>
     </div>
   );

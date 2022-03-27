@@ -58,3 +58,5 @@ export const eliminarEntidad = async ({
     console.log({ error });
   }
 };
+
+
