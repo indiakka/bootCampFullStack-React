@@ -13,6 +13,7 @@ function BotonAccion({ tipo, onClick = () => {}, index = "" }) {
         "btn-danger": tipo === "eliminar",
       })}
       onClick={( e ) => onClick( e, index )}
+
     >
       {tipo === "editar" && <FontAwesomeIcon icon={faEdit} />}
       {tipo === "eliminar" && <FontAwesomeIcon icon={faTrashAlt} />}

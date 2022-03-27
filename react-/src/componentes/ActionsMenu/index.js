@@ -1,18 +1,14 @@
 import React from "react";
 import "./ActionsMenu.css";
 
-function ActionMenu ( {
-  cambiarModal = () => { },
-  titulo,
-} )
-{
+function ActionMenu({ cambiarModal = () => {}, titulo }) {
   return (
-    <div className="actions-menu">
+    <div classNameName="actions-menu">
       <h1>{titulo}</h1>
-      <div className="actions-menu-content">
+      <div classNameName="actions-menu-content">
         <button
           type="button"
-          className="btn btn-primary"
+          classNameName="btn btn-primary"
           data-toggle="modal"
           data-target="#exampleModalCenter"
           onClick={cambiarModal}

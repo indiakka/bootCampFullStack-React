@@ -6,12 +6,12 @@ function Select({
   nombreCampo = "vacio",
   onChange = {},
   placeholder,
-  value=''
+  value = "",
 }) {
   return (
     <select
       id="tipo"
-      className="form-control"
+      classNameName="form-control"
       onChange={onChange}
       name={nombreCampo}
       value={value}

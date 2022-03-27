@@ -15,7 +15,7 @@ function Fila({
       <td>{entidad.nombre}</td>
       <td>{entidad.dueno}</td>
       <td>
-        <div className="btn-group" role="group" aria-label="Basic example">
+        <div classNameName="btn-group" role="group" aria-label="Basic example">
           <BotonAccion tipo="editar" onclick={editarEntidad} index={index} />
           <BotonAccion tipo="eliminar" onclick={(e) => eliminarEntidad(e, index)} />
         </div>

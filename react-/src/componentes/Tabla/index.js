@@ -11,7 +11,7 @@ function Tabla({
   const columnas = entidades.length > 0 ? Object.keys(entidades[0]) : [];
 
   return (
-    <table className="table table-stripped table-hover">
+    <table classNameName="table table-stripped table-hover">
       <Encabezado columnas={columnas} />
       <tbody id="lista-mascotas">
         {entidades.map((entidad, index) => (
@@ -20,7 +20,7 @@ function Tabla({
             entidad={entidad}
             index={index}
             editarEntidad={editarEntidad}
-            eliminarEntidad = {eliminarEntidad}
+            eliminarEntidad={eliminarEntidad}
           />
         ))}
       </tbody>

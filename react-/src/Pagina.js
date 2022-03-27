@@ -4,6 +4,7 @@ import ActionMenu from "./componentes/ActionsMenu";
 import Tabla from "./componentes/Tabla";
 import Modal from "./componentes/Modal";
 import { listarEntidad, crearEditarEntidad, eliminarEntidad } from "./servicio";
+//import ComponenteCampo from "./componentes/ComponenteCampo";
 
 class Pagina extends Component {
   constructor(props) {
@@ -31,12 +32,12 @@ class Pagina extends Component {
     const {
       target: { value, name },
     } = evento;
-    let { objeto } = this.state.objeto;
+    let { objeto } = this.state;
     objeto = { ...objeto, [name]: value };
     this.setState({ objeto });
   }; //... copia de objeto del constructor
 
-  crearEntidad = async () => {
+  crearEntidad = async (_evento = null) => {
     const { entidad } = this.props;
     let { objeto, method, idObjeto } = this.state;
     await crearEditarEntidad({ entidad, objeto, method, idObjeto });
@@ -70,7 +71,7 @@ class Pagina extends Component {
     const { titulo = "Página sin título" } = this.props;
     return (
       <>
-        <div className="container">
+        <div classNameName="container">
           <Nav />
           <ActionMenu cambiarModal={this.cambiarModal} titulo={titulo} />
           <Tabla

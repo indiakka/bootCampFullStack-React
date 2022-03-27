@@ -1,15 +1,15 @@
 import React from "react";
-import './ModalHeader.css'
+import "./ModalHeader.css";
 
 function ModalHeader({ cambiarModal = () => {} }) {
   return (
-    <div className="modal-header">
-      <h5 className="modal-title" id="exampleModalLongTitle">
+    <div classNameName="modal-header">
+      <h5 classNameName="modal-title" id="exampleModalLongTitle">
         Nueva Mascota
       </h5>
       <button
         type="button"
-        className="close"
+        classNameName="close"
         data-dismiss="modal"
         aria-label="Close"
         onClick={cambiarModal}

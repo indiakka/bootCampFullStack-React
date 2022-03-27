@@ -1,57 +1,38 @@
 import React from "react";
-import './Nav.css'
+//import { Link } from "react-router-dom";
+import Search from "../Search";
+import "./Nav.css";
 
 function Nav() {
   return (
     <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-      <div className="navbar-brand" href="#">
-        Mascotas
+      <div className="navbar-brand" to="/">
+        Veterinaria
       </div>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarColor03"
-        aria-controls="navbarColor03"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarColor03">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/index.html">
-              Mascotas<span class="sr-only">(current)</span>
-            </a>
+      <div className="navbar-right" id="navbarColor03">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item active">
+            <div className="nav-div" to="/">
+              Mascotas<span className="sr-only">(current)</span>
+            </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/veterinarias.html">
+          <li className="nav-item">
+            <div className="nav-div" to="/veterinarias">
               Veterinari@s
-            </a>
+            </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/consultas.html">
+          <li className="nav-item">
+            <div className="nav-div" to="/consultas">
               Consultas
-            </a>
+            </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/duenos.html">
+          <li className="nav-item">
+            <div className="nav-div" to="/duenos">
               Dueños
-            </a>
+            </div>
           </li>
         </ul>
-        <form class="form-inline">
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
+        <Search />
       </div>
     </nav>
   );

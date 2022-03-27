@@ -4,7 +4,7 @@ import "./Encabezado.css";
 function Encabezado(props) {
   if (props.columnas.length === 0) return false;
   return (
-    <thead className="thead-dark">
+    <thead classNameName="thead-dark">
       <tr>
         <th scope="col">#</th>
         {props.columnas.map((columna, index) => (
