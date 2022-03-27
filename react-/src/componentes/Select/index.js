@@ -11,7 +11,7 @@ function Select({
   return (
     <select
       id="tipo"
-      classNameName="form-control"
+      className="form-control"
       onChange={onChange}
       name={nombreCampo}
       value={value}

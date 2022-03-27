@@ -3,12 +3,12 @@ import "./ModalFooter.css";
 
 function ModalFooter({ cambiarModal = () => {}, crearEntidad = () => {} }) {
   return (
-    <div classNameName="modal-footer">
+    <div className="modal-footer">
       <button
         onClick={cambiarModal}
         id="btn-cerrar"
         type="button"
-        classNameName="btn btn-secondary"
+        className="btn btn-secondary"
         data-dismiss="modal"
       >
         Cerrar
@@ -18,7 +18,7 @@ function ModalFooter({ cambiarModal = () => {}, crearEntidad = () => {} }) {
         id="btn-guardar"
         data-dismiss="modal"
         type="button"
-        classNameName="btn btn-primary"
+        className="btn btn-primary"
       >
         Guardar
       </button>

@@ -71,7 +71,7 @@ class Pagina extends Component {
     const { titulo = "Página sin título" } = this.props;
     return (
       <>
-        <div classNameName="container">
+        <div className="container">
           <Nav />
           <ActionMenu cambiarModal={this.cambiarModal} titulo={titulo} />
           <Tabla

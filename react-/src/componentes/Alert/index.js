@@ -3,11 +3,11 @@ import "./Alert.css";
 
 function Alert(alertSwitch = () => {}) {
   return (
-    <div classNameName="alert alert-danger alert-dismissible" role="alert">
+    <div className="alert alert-danger alert-dismissible" role="alert">
       <strong>Oops!</strong> Algo hicimos mal, por favor vuelve a intentarlo!.
       <button
         type="button"
-        classNameName="close"
+        className="close"
         data-dismiss="alert"
         aria-label="Close"
         onClick={alertSwitch}

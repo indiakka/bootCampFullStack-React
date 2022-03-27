@@ -16,14 +16,14 @@ function Modal({
 }) {
   return (
     <>
-      <div classNameName="modal">
-        <div classNameName="modal-dialog modal-dialog-centered">
-          <div classNameName="modal-content">
+      <div className="modal">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
             <ModalHeader cambiarModal={cambiarModal} />
-            <div classNameName="modal-body">
+            <div className="modal-body">
               <form id="form">
-                <div classNameName="form-row">
-                  <div classNameName="col">
+                <div className="form-row">
+                  <div className="col">
                     <Select
                       nombreCampo="tipo"
                       options={tiposMascota}
@@ -33,8 +33,8 @@ function Modal({
                     />
                   </div>
                 </div>
-                <div classNameName="form-row">
-                  <div classNameName="col">
+                <div className="form-row">
+                  <div className="col">
                     <Input
                       nombreCampo="nombre"
                       tipo="text"
@@ -43,7 +43,7 @@ function Modal({
                       value={objeto.nombre}
                     />
                   </div>
-                  <div classNameName="col">
+                  <div className="col">
                     <Select
                       placeholder="dueño"
                       options={duenos}
@@ -62,7 +62,7 @@ function Modal({
           </div>
         </div>
       </div>
-      <div classNameName="modal-backdrop fade show"></div>
+      <div className="modal-backdrop fade show"></div>
     </>
   );
 }

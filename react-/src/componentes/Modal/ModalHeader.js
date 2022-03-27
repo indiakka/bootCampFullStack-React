@@ -3,13 +3,13 @@ import "./ModalHeader.css";
 
 function ModalHeader({ cambiarModal = () => {} }) {
   return (
-    <div classNameName="modal-header">
-      <h5 classNameName="modal-title" id="exampleModalLongTitle">
+    <div className="modal-header">
+      <h5 className="modal-title" id="exampleModalLongTitle">
         Nueva Mascota
       </h5>
       <button
         type="button"
-        classNameName="close"
+        className="close"
         data-dismiss="modal"
         aria-label="Close"
         onClick={cambiarModal}

@@ -3,12 +3,12 @@ import "./ActionsMenu.css";
 
 function ActionMenu({ cambiarModal = () => {}, titulo }) {
   return (
-    <div classNameName="actions-menu">
+    <div className="actions-menu">
       <h1>{titulo}</h1>
-      <div classNameName="actions-menu-content">
+      <div className="actions-menu-content">
         <button
           type="button"
-          classNameName="btn btn-primary"
+          className="btn btn-primary"
           data-toggle="modal"
           data-target="#exampleModalCenter"
           onClick={cambiarModal}

@@ -12,7 +12,7 @@ function Input({
     <input //input de html
       type={tipo}
       name={nombreCampo}
-      classNameName="form-control"
+      className="form-control"
       placeholder={placeholder}
       onInput={onInput} //input de js
       value={value}

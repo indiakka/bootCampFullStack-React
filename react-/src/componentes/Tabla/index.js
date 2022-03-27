@@ -11,7 +11,7 @@ function Tabla({
   const columnas = entidades.length > 0 ? Object.keys(entidades[0]) : [];
 
   return (
-    <table classNameName="table table-stripped table-hover">
+    <table className="table table-stripped table-hover">
       <Encabezado columnas={columnas} />
       <tbody id="lista-mascotas">
         {entidades.map((entidad, index) => (
