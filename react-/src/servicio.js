@@ -1,11 +1,13 @@
-const API_URL = "https://veterinaria-backend-ebon.vercel.app/";
+const API_URL = "https://veterinaria-backend-ebon.vercel.app";
 
 export const listarEntidad = async ({ entidad = "mascotas" }) => {
   try {
     const respuesta = await fetch(`${API_URL}/${entidad}`);
     const datos = await respuesta.json();
     return datos;
-  } catch (error) {}
+  } catch (error) {
+    console.log({ error });
+  }
 }; // la entidad va a ir a nuestra API en Vercel
 
 export const crearEditarEntidad = async ({
@@ -16,8 +18,8 @@ export const crearEditarEntidad = async ({
 }) => {
   try {
     let url = null;
-    if (method === "PUT" && idObjeto) {
-      url += `${API_URL}/${entidad}/${idObjeto}`;
+    if (method === "PUT" && (idObjeto || idObjeto === 0)) {
+      url = `${API_URL}/${entidad}/${idObjeto}`;
     } else if (method === "POST") {
       url = `${API_URL}/${entidad}`;
     }
@@ -34,5 +36,7 @@ export const crearEditarEntidad = async ({
     });
     const datos = await respuesta.json();
     return datos;
-  } catch (error) {}
+  } catch (error) {
+    console.log({ error });
+  }
 };

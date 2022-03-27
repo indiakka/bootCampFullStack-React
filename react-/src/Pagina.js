@@ -3,20 +3,21 @@ import Nav from "./componentes/Nav";
 import ActionMenu from "./componentes/ActionsMenu";
 import Tabla from "./componentes/Tabla";
 import Modal from "./componentes/Modal";
-import { listarEntidad, crearEditarEntidad } from "./servicio";
 
-class Pagina extends Component() {
+class Pagina extends Component {
   constructor(props) {
     super(props); //llama a todos los métodos del componente
     this.state = {
       mostarModal: false,
       entidades: [],
       objeto: {},
+      idObjeto: null,
+      method: "POST",
     };
   }
 
-  cambiarModal = () => {
-    this.setState({ mostarModal: !this.state.mostarModal });
+  cambiarModal = (_evento, method = "POST") => {
+    this.setState({ mostarModal: !this.state.mostarModal, method });
   };
 
   listar = async () => {
@@ -36,10 +37,19 @@ class Pagina extends Component() {
 
   crearEntidad = async () => {
     const { entidad } = this.props;
-    let { objeto } = this.state;
-    const method = "POST";
-     await crearEditarEntidad({ entidad, objeto, method });
-   this.cambiarModal()
+    let { objeto, method, idObjeto } = this.state;
+    await crearEditarEntidad({ entidad, objeto, method, idObjeto });
+    this.cambiarModal();
+    this.listar();
+  };
+
+  editarEntidad = (_evento, index) => {
+    const objeto = { ...this.state.entidades[index] };
+    this.setState({ objeto, idObjeto: index }, () => {
+      this.cambiarModal(null, "PUT");
+    });
+  };
+
     this.listar();
   };
 
@@ -58,12 +68,18 @@ class Pagina extends Component() {
         <div className="container">
           <Nav />
           <ActionMenu cambiarModal={this.cambiarModal} titulo={titulo} />
-          <Tabla entidades={this.state.entidades} />
+          <Tabla
+            entidades={this.state.entidades}
+            editarEntidad={this.editarEntidad}
+            eliminarEntidad={this.eliminarEntidad}
+          />
           {this.state.mostarModal && (
             <Modal
               cambiarModal={this.cambiarModal}
               manejarInput={this.manejarInput}
               crearEntidad={this.crearEntidad}
+              objeto={this.state.objeto}
+              eliminarEntidad={this.eliminarEntidad}
             />
           )}
         </div>
