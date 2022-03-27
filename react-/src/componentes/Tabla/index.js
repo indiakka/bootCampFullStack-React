@@ -6,6 +6,7 @@ import "./Tabla.css";
 function Tabla({
   entidades = [],
   editarEntidad = () => {},
+  eliminarEntidad = () => {},
 }) {
   const columnas = entidades.length > 0 ? Object.keys(entidades[0]) : [];
 
@@ -19,6 +20,7 @@ function Tabla({
             entidad={entidad}
             index={index}
             editarEntidad={editarEntidad}
+            eliminarEntidad = {eliminarEntidad}
           />
         ))}
       </tbody>

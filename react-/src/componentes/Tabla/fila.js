@@ -6,6 +6,7 @@ function Fila({
   index,
   entidad,
   editarEntidad = () => {},
+  eliminarEntidad = () => {},
 }) {
   return (
     <tr>
@@ -16,6 +17,7 @@ function Fila({
       <td>
         <div className="btn-group" role="group" aria-label="Basic example">
           <BotonAccion tipo="editar" onclick={editarEntidad} index={index} />
+          <BotonAccion tipo="eliminar" onclick={(e) => eliminarEntidad(e, index)} />
         </div>
       </td>
     </tr>

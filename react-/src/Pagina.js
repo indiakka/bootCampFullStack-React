@@ -3,6 +3,7 @@ import Nav from "./componentes/Nav";
 import ActionMenu from "./componentes/ActionsMenu";
 import Tabla from "./componentes/Tabla";
 import Modal from "./componentes/Modal";
+import { listarEntidad, crearEditarEntidad, eliminarEntidad } from "./servicio";
 
 class Pagina extends Component {
   constructor(props) {
@@ -50,6 +51,10 @@ class Pagina extends Component {
     });
   };
 
+  eliminarEntidad = async (_evento, index) => {
+    const { entidad } = this.props;
+    const respuesta = await eliminarEntidad({ entidad, idObjeto: index });
+    console.log({ respuesta });
     this.listar();
   };
 
