@@ -13,28 +13,32 @@ function App() {
         <Route
           exact
           path="/"
-          component={(props) => (
-            <Pagina {...props} titulo="Mascotas" entidad="mascotas" />
-          )}
-        />
+          element={
+            <Pagina  titulo="Mascotas" entidad="mascotas" />
+          }>
+        </Route>
         <Route
+          exact
           path="/veterinarias"
-          component={(props) => (
-            <Pagina {...props} titulo="Veterinari@s" entidad="veterinarias" />
-          )}
-        />
+          element={
+            <Pagina  titulo="Veterinari@s" entidad="veterinarias" />
+          }>
+        </Route>
         <Route
+          exact
           path="/duenos"
-          component={(props) => (
-            <Pagina {...props} titulo="Dueñ@s" entidad="duenos" />
-          )}
-        />
+          element={
+            <Pagina  titulo="Dueñ@s" entidad="duenos" />
+          }>
+        </Route>
         <Route
+          exact
           path="/consultas"
-          component={(props) => (
-            <Pagina {...props} titulo="Consultas" entidad="consultas" />
-          )}
-        />
+          element={
+            <Pagina  titulo="Consultas" entidad="consultas" />
+          }>
+        </Route>
+        
       </Routes>
     </div>
   );
