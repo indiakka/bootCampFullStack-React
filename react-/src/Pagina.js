@@ -21,13 +21,15 @@ const ComponenteCampo = ({
     case "veterinaria":
     case "diagnostico":
       return (
-        <Select
-          nombreCampo={nombreCampo}
-          options={tiposMascota}
-          onChange={manejarInput}
-          placeholder={nombreCampo}
-          value={objeto[nombreCampo]}
-        />
+        <div className="form-row">
+          <Select
+            nombreCampo={nombreCampo}
+            options={tiposMascota}
+            onChange={manejarInput}
+            placeholder={nombreCampo}
+            value={objeto[nombreCampo]}
+          />
+        </div>
       );
     case "nombre":
     case "dueno":
@@ -35,14 +37,18 @@ const ComponenteCampo = ({
     case "dni":
     case "historia":
       return (
-        <Input
-          nombreCampo={nombreCampo}
-          tipo="text"
-          onChange={manejarInput}
-          placeholder={nombreCampo}
-          value={objeto[nombreCampo]}
-        />
+        <div className="form-row">
+          <Input
+            nombreCampo={nombreCampo}
+            tipo="text"
+            onChange={manejarInput}
+            placeholder={nombreCampo}
+            value={objeto[nombreCampo]}
+          />
+        </div>
       );
+    default: 
+    return false
   }
 };
 
@@ -136,7 +142,7 @@ class Pagina extends Component {
                 <ComponenteCampo
                   key={index}
                   nombreCampo={columna}
-                  manejarInput={manejarInput}
+                  manejarInput={this.manejarInput}
                   objeto={this.state.objeto}
                 />
               ))}
