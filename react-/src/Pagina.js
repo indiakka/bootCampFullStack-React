@@ -7,16 +7,43 @@ import Select from "./componentes/Select";
 import Input from "./componentes/Input";
 //import ComponenteCampo from "./componentes/ComponenteCampo";
 
-const ComponenteCampo = {
-  tipo: Select,
-  nombre: Input,
-  dueno: Input,
-  apellido: Input,
-  dni: Input,
-  mascota: Select,
-  veterinaria: Select,
-  historia: Input,
-  diagnostico: Select
+const tiposMascota = [{ valor: "Perro", etiqueta: "Perro" }];
+const duenos = [{ valor: "Felix", etiqueta: "Felix" }];
+
+const ComponenteCampo = ({
+  manejarInput = () => {},
+  objeto = {},
+  nombreCampo = "",
+}) => {
+  switch (nombreCampo) {
+    case "tipo":
+    case "mascota":
+    case "veterinaria":
+    case "diagnostico":
+      return (
+        <Select
+          nombreCampo={nombreCampo}
+          options={tiposMascota}
+          onChange={manejarInput}
+          placeholder={nombreCampo}
+          value={objeto[nombreCampo]}
+        />
+      );
+    case "nombre":
+    case "dueno":
+    case "apellido":
+    case "dni":
+    case "historia":
+      return (
+        <Input
+          nombreCampo={nombreCampo}
+          tipo="text"
+          onChange={manejarInput}
+          placeholder={nombreCampo}
+          value={objeto[nombreCampo]}
+        />
+      );
+  }
 };
 
 class Pagina extends Component {
@@ -105,11 +132,14 @@ class Pagina extends Component {
               crearEntidad={this.crearEntidad}
               objeto={this.state.objeto}
             >
-              {columnas.map( ( columna, index ) =>
-              {
-                const Componente = ComponenteCampo[ columna ]
-                return <Componente />
-              })}
+              {columnas.map((columna, index) => (
+                <ComponenteCampo
+                  key={index}
+                  nombreCampo={columna}
+                  manejarInput={manejarInput}
+                  objeto={this.state.objeto}
+                />
+              ))}
             </Modal>
           )}
         </div>

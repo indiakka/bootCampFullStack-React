@@ -10,11 +10,11 @@ function Select({
 }) {
   return (
     <select
-      id="tipo"
+      id={nombreCampo}
       className="form-control"
       onChange={onChange}
       name={nombreCampo}
-      value={value}
+      defaultValue={value}
     >
       <option value="">Seleccione {placeholder}</option>
       {options.map(({ valor, etiqueta }, index) => (
