@@ -13,32 +13,23 @@ function App() {
         <Route
           exact
           path="/"
-          element={
-            <Pagina  titulo="Mascotas" entidad="mascotas" />
-          }>
-        </Route>
+          element={<Pagina titulo="Mascotas" entidad="mascotas" />}
+        ></Route>
         <Route
           exact
           path="/veterinarias"
-          element={
-            <Pagina  titulo="Veterinari@s" entidad="veterinarias" />
-          }>
-        </Route>
+          element={<Pagina titulo="Veterinari@s" entidad="veterinarias" />}
+        ></Route>
         <Route
           exact
           path="/duenos"
-          element={
-            <Pagina  titulo="Dueñ@s" entidad="duenos" />
-          }>
-        </Route>
+          element={<Pagina titulo="Dueñ@s" entidad="duenos" />}
+        ></Route>
         <Route
           exact
           path="/consultas"
-          element={
-            <Pagina  titulo="Consultas" entidad="consultas" />
-          }>
-        </Route>
-        
+          element={<Pagina titulo="Consultas" entidad="consultas" />}
+        ></Route>
       </Routes>
     </div>
   );
