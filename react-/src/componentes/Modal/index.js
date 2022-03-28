@@ -1,8 +1,6 @@
 import React from "react";
 import ModalHeader from "./ModalHeader";
 import ModalFooter from "./ModalFooter";
-import Select from "../Select";
-import Input from "../Input";
 import "./Modal.css";
 
 

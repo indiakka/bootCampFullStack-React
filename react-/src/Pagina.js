@@ -3,54 +3,7 @@ import ActionMenu from "./componentes/ActionsMenu";
 import Tabla from "./componentes/Tabla";
 import Modal from "./componentes/Modal";
 import { listarEntidad, crearEditarEntidad, eliminarEntidad } from "./servicio";
-import Select from "./componentes/Select";
-import Input from "./componentes/Input";
-//import ComponenteCampo from "./componentes/ComponenteCampo";
-
-const tiposMascota = [{ valor: "Perro", etiqueta: "Perro" }];
-const duenos = [{ valor: "Felix", etiqueta: "Felix" }];
-
-const ComponenteCampo = ({
-  manejarInput = () => {},
-  objeto = {},
-  nombreCampo = "",
-}) => {
-  switch (nombreCampo) {
-    case "tipo":
-    case "mascota":
-    case "veterinaria":
-    case "diagnostico":
-      return (
-        <div className="form-row">
-          <Select
-            nombreCampo={nombreCampo}
-            options={tiposMascota}
-            onChange={manejarInput}
-            placeholder={nombreCampo}
-            value={objeto[nombreCampo]}
-          />
-        </div>
-      );
-    case "nombre":
-    case "dueno":
-    case "apellido":
-    case "dni":
-    case "historia":
-      return (
-        <div className="form-row">
-          <Input
-            nombreCampo={nombreCampo}
-            tipo="text"
-            onChange={manejarInput}
-            placeholder={nombreCampo}
-            value={objeto[nombreCampo]}
-          />
-        </div>
-      );
-    default: 
-    return false
-  }
-};
+import ComponenteCampo from "./componentes/ComponenteCampo";
 
 class Pagina extends Component {
   constructor(props) {
@@ -119,7 +72,7 @@ class Pagina extends Component {
   // render siempre debe ir el último
   //render = interpreta el código para mostrar
   render() {
-    const { titulo = "Página sin título" } = this.props;
+    const { titulo = "Página sin título", entidad } = this.props;
     const { columnas } = this.state;
     return (
       <>
