@@ -7,7 +7,7 @@ const evaluarCampo = ({ entidad, columna }) => {
     return `${entidad[columna].nombre} ${entidad[columna].apellido}`;
   }
   if (columna === "mascota") {
-    return `${entidad[columna].nombre} ${entidad[columna].tipo}`;
+    return `${entidad[columna].nombre} (${entidad[columna].tipo})`;
   }
   return entidad[columna];
 };
@@ -22,20 +22,21 @@ function Fila({
   return (
     <tr>
       <th scope="row">{index}</th>
+      <td>{entidad.tipo}</td>
+      <td>{entidad.nombre}</td>
+      <td>{entidad.dueno}</td>
       {columnas.map((columna, _index) => (
         <td key={`col-${columna}-${_index}`}>
           {evaluarCampo({ entidad, columna })}
         </td>
       ))}
-      <td>{entidad.tipo}</td>
-      <td>{entidad.nombre}</td>
-      <td>{entidad.dueno}</td>
+
       <td>
         <div className="btn-group" role="group" aria-label="Basic example">
-          <BotonAccion tipo="editar" onclick={editarEntidad} index={index} />
+          <BotonAccion tipo="editar" onClick={editarEntidad} index={index} />
           <BotonAccion
             tipo="eliminar"
-            onclick={(e) => eliminarEntidad(e, index)}
+            onClick={(e) => eliminarEntidad(e, index)}
           />
         </div>
       </td>
