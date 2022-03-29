@@ -6,9 +6,7 @@ import "./Modal.css";
 
 function Modal({
   cambiarModal = () => {},
-  manejarInput = () => {},
   crearEntidad = () => {},
-  objeto = {},
   children = [],
 }) {
   return (

@@ -60,3 +60,17 @@ export const eliminarEntidad = async ({
 };
 
 
+export const obtenerUno = async ({ entidad = "mascotas", idObjeto= null }) => {
+  if ( !idObjeto || !entidad )
+  {
+    return {}
+  }
+  try
+  {
+    const respuesta = await fetch(`${API_URL}/${entidad}/${idObjeto}`);
+    const datos = await respuesta.json();
+    return datos;
+  } catch (error) {
+    console.log({ error });
+  }
+};

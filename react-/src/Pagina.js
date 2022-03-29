@@ -73,7 +73,7 @@ class Pagina extends Component {
   //render = interpreta el código para mostrar
   render() {
     const { titulo = "Página sin título", entidad } = this.props;
-    const { columnas } = this.state;
+    const { columnas, idObjeto } = this.state;
     return (
       <>
         <div className="container">
@@ -89,7 +89,9 @@ class Pagina extends Component {
               cambiarModal={this.cambiarModal}
               manejarInput={this.manejarInput}
               crearEntidad={this.crearEntidad}
-              objeto={this.state.objeto}
+              //objeto={this.state.objeto}
+              entidad={entidad}
+              idObjeto={idObjeto}
             >
               {columnas.map((columna, index) => (
                 <ComponenteCampo
