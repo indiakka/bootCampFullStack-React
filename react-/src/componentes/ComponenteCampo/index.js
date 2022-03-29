@@ -16,13 +16,19 @@ function ComponenteCampo({
     case "dueno":
       return (
         <div className="form-row">
-          {Object.keys(options).length > 0 ? (<Select
-            nombreCampo={nombreCampo}
-            options={options[nombreCampo]}
-            onChange={manejarInput}
-            placeholder={nombreCampo}
-            value={objeto[nombreCampo]}
-          />) : 'cargando opciones...'}
+          {options[nombreCampo].length > 0 ? (
+            <Select
+              nombreCampo={nombreCampo}
+              options={options[nombreCampo]}
+              onChange={manejarInput}
+              placeholder={nombreCampo}
+              value={objeto[nombreCampo]}
+              defaultValue={objeto[nombreCampo]} 
+              selectedValue={objeto[nombreCampo]}
+            />
+          ) : (
+            "cargando opciones..."
+          )}
         </div>
       );
     case "nombre":
@@ -30,15 +36,13 @@ function ComponenteCampo({
     case "dni":
     case "historia":
       return (
-        <div className="form-row">
+        <div className="col">
           <Input
             nombreCampo={nombreCampo}
             tipo="text"
             onChange={manejarInput}
             placeholder={nombreCampo}
             value={objeto[nombreCampo]}
-            defaultValue={objeto[nombreCampo]}
-            selectedValue={objeto[nombreCampo]}
           />
         </div>
       );
