@@ -27,7 +27,7 @@ export const crearEditarEntidad = async ({
     if (!url) {
       throw new Error("No cumple criterios de envío");
     }
-    const respuesta = await fetch(`${API_URL}/${entidad}/${idObjeto}`, {
+    const respuesta = await fetch(url, {
       method,
       headers: {
         "Content-Type": "application/json",
@@ -61,9 +61,6 @@ export const eliminarEntidad = async ({
 };
 
 export const obtenerUno = async ({ entidad = "mascotas", idObjeto = null }) => {
-  if (!idObjeto === null || !entidad) {
-    return {};
-  }
   try {
     const respuesta = await fetch(`${API_URL}/${entidad}/${idObjeto}`);
     const datos = await respuesta.json();

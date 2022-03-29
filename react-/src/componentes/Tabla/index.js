@@ -6,10 +6,9 @@ import "./Tabla.css";
 function Tabla({
   entidades = [],
   editarEntidad = () => {},
-  eliminarEntidad = () => { },
-  columnas = []
+  eliminarEntidad = () => {},
+  columnas = [],
 }) {
-
   return (
     <table className="table table-stripped table-hover">
       <Encabezado columnas={columnas} />
@@ -21,7 +20,7 @@ function Tabla({
             index={index}
             editarEntidad={editarEntidad}
             eliminarEntidad={eliminarEntidad}
-          columnas={columnas}
+            columnas={columnas}
           />
         ))}
       </tbody>

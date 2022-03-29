@@ -6,7 +6,6 @@ function ModalFooter({ cambiarModal = () => {}, crearEntidad = () => {} }) {
     <div className="modal-footer">
       <button
         onClick={cambiarModal}
-        id="btn-cerrar"
         type="button"
         className="btn btn-secondary"
         data-dismiss="modal"

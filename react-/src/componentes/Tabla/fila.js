@@ -22,9 +22,6 @@ function Fila({
   return (
     <tr>
       <th scope="row">{index}</th>
-      <td>{entidad.tipo}</td>
-      <td>{entidad.nombre}</td>
-      <td>{entidad.dueno}</td>
       {columnas.map((columna, _index) => (
         <td key={`col-${columna}-${_index}`}>
           {evaluarCampo({ entidad, columna })}

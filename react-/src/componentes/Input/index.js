@@ -13,7 +13,7 @@ function Input({
       type={tipo}
       name={nombreCampo}
       className="form-control"
-      placeholder={placeholder}
+      placeholder={nombreCampo}
       onInput={onInput} //input de js
       defaultValue={value}
     />
