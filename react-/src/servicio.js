@@ -1,4 +1,5 @@
-const API_URL = "https://veterinaria-backend-ebon.vercel.app";
+//const API_URL = "https://veterinaria-backend-ebon.vercel.app";
+const API_URL ='http://localhost:5000'
 
 export const listarEntidad = async ({ entidad = "mascotas" }) => {
   try {
@@ -26,7 +27,7 @@ export const crearEditarEntidad = async ({
     if (!url) {
       throw new Error("No cumple criterios de envío");
     }
-    const respuesta = await fetch(`${API_URL}/${entidad}`, {
+    const respuesta = await fetch(`${API_URL}/${entidad}/${idObjeto}`, {
       method,
       headers: {
         "Content-Type": "application/json",
