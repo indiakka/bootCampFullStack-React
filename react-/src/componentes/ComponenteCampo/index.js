@@ -26,7 +26,37 @@ function ComponenteCampo({
 }) {
   const [options, setOptions] = useState(opcionesIniciales);
 
- 
+  useEffect(() => {
+    const obtenerOptionsBackend = async () => {
+      const mascotasPromise = listarEntidad({ entidad: "mascotas" });
+      const veterinariasPromise = listarEntidad({ entidad: "veterinarias" });
+      const duenosPromise = listarEntidad({ entidad: "duenos" });
+      /* no ponemos await en las anteriores porque habría que esperar 
+      a que se hagan una a una desde la 1ª. Para hacerlo todo al mismo tiempo
+      creamos el let siguiente  */
+      let [mascota, veterinaria, dueno] = await Promise.all([
+        mascotasPromise,
+        veterinariasPromise,
+        duenosPromise,
+      ]);
+
+      mascota = mascota.map((_mascota, index) => ({
+        valor: index,
+        etiqueta: `${_mascota.nombre}(${_mascota.tipo})`,
+      }));
+      veterinaria = veterinaria.map((_veterinaria, index) => ({
+        valor: index,
+        etiqueta: `${_veterinaria.nombre}${_veterinaria.apellido}`,
+      }));
+      dueno = dueno.map((_dueno, index) => ({
+        valor: index,
+        etiqueta: `${_dueno.nombre}${_dueno.apellido}`,
+      }));
+      const nuevasOpciones = { ...options, mascota, veterinaria, dueno };
+      setOptions(nuevasOpciones);
+    };
+    obtenerOptionsBackend();
+  }, []);
 
   switch (nombreCampo) {
     case "tipo":

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ActionMenu from "./componentes/ActionsMenu";
 import Tabla from "./componentes/Tabla";
 import Modal from "./componentes/Modal";
-import { listarEntidad, crearEditarEntidad, eliminarEntidad } from "./servicio";
+import { listarEntidad, crearEditarEntidad, eliminarEntidad, obtenerUno } from "./servicio";
 import ComponenteCampo from "./componentes/ComponenteCampo";
 
 class Pagina extends Component {
@@ -41,7 +41,7 @@ class Pagina extends Component {
     this.setState({ objeto });
   }; //... copia de objeto del constructor
 
-  crearEntidad = async (_evento = null) => {
+  crearEntidad = async () => {
     const { entidad } = this.props;
     let { objeto, method, idObjeto } = this.state;
     await crearEditarEntidad({ entidad, objeto, method, idObjeto });
@@ -49,8 +49,10 @@ class Pagina extends Component {
     this.listar();
   };
 
-  editarEntidad = (_evento, index) => {
-    const objeto = { ...this.state.entidades[index] };
+  editarEntidad = async ( _evento, index ) =>
+  {
+    const {entidad} = this.props
+    const objeto = await obtenerUno( {entidad, idObjeto: index})
     this.setState({ objeto, idObjeto: index }, () => {
       this.cambiarModal(null, "PUT");
     });
@@ -73,23 +75,22 @@ class Pagina extends Component {
   //render = interpreta el código para mostrar
   render() {
     const { titulo = "Página sin título", entidad } = this.props;
-    const { columnas, idObjeto } = this.state;
+    const { columnas, idObjeto, entidades, objeto } = this.state;
     return (
       <>
         <div className="container">
           <ActionMenu cambiarModal={this.cambiarModal} titulo={titulo} />
           <Tabla
-            entidades={this.state.entidades}
+            entidades={entidades}
             editarEntidad={this.editarEntidad}
             eliminarEntidad={this.eliminarEntidad}
-            columnas={this.columnas}
+            columnas={columnas}
           />
           {this.state.mostarModal && (
             <Modal
               cambiarModal={this.cambiarModal}
               manejarInput={this.manejarInput}
               crearEntidad={this.crearEntidad}
-              //objeto={this.state.objeto}
               entidad={entidad}
               idObjeto={idObjeto}
             >
@@ -98,7 +99,7 @@ class Pagina extends Component {
                   key={index}
                   nombreCampo={columna}
                   manejarInput={this.manejarInput}
-                  objeto={this.state.objeto}
+                  objeto={objeto}
                 />
               ))}
             </Modal>

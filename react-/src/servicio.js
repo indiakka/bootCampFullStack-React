@@ -59,14 +59,11 @@ export const eliminarEntidad = async ({
   }
 };
 
-
-export const obtenerUno = async ({ entidad = "mascotas", idObjeto= null }) => {
-  if ( !idObjeto || !entidad )
-  {
-    return {}
+export const obtenerUno = async ({ entidad = "mascotas", idObjeto = null }) => {
+  if (!idObjeto === null || !entidad) {
+    return {};
   }
-  try
-  {
+  try {
     const respuesta = await fetch(`${API_URL}/${entidad}/${idObjeto}`);
     const datos = await respuesta.json();
     return datos;
