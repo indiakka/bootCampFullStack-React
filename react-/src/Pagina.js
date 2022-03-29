@@ -2,8 +2,29 @@ import React, { Component } from "react";
 import ActionMenu from "./componentes/ActionsMenu";
 import Tabla from "./componentes/Tabla";
 import Modal from "./componentes/Modal";
-import { listarEntidad, crearEditarEntidad, eliminarEntidad, obtenerUno } from "./servicio";
+import {
+  listarEntidad,
+  crearEditarEntidad,
+  eliminarEntidad,
+  obtenerUno,
+} from "./servicio";
 import ComponenteCampo from "./componentes/ComponenteCampo";
+
+const opcionesIniciales = {
+  tipo: [
+    { valor: "Perro", etiqueta: "Perro" },
+    { valor: "Gato", etiqueta: "Gato" },
+    { valor: "Pajaro", etiqueta: "Pajaro" },
+    { valor: "Otro", etiqueta: "Otro" },
+  ],
+  diagnostico: [
+    { valor: "Leishmaniosis", etiqueta: "Leishmaniosis" },
+    { valor: "Epilepsia Idiopática", etiqueta: "Epilepsia Idiopática" },
+    { valor: "Moquillo", etiqueta: "Moquillo" },
+    { valor: "Parvovirus", etiqueta: "Parvovirus" },
+    { valor: "Aspergilosis", etiqueta: "Aspergilosis" },
+  ],
+};
 
 class Pagina extends Component {
   constructor(props) {
@@ -15,6 +36,7 @@ class Pagina extends Component {
       idObjeto: null,
       method: "POST",
       columnas: [],
+      options: opcionesIniciales,
     };
   }
 
@@ -49,11 +71,35 @@ class Pagina extends Component {
     this.listar();
   };
 
-  editarEntidad = async ( _evento, index ) =>
-  {
-    const {entidad} = this.props
-    const objeto = await obtenerUno( {entidad, idObjeto: index})
-    this.setState({ objeto, idObjeto: index }, () => {
+  editarEntidad = async (_evento, index) => {
+    const { entidad } = this.props;
+    const { options } = this.state;
+    const objeto = await obtenerUno({ entidad, idObjeto: index });
+    /* no ponemos await en las anteriores porque habría que esperar 
+      a que se hagan una a una desde la 1ª. Para hacerlo todo al mismo tiempo
+      creamos el let siguiente  */
+    const mascotasPromise = listarEntidad({ entidad: "mascotas" });
+    const veterinariasPromise = listarEntidad({ entidad: "veterinarias" });
+    const duenosPromise = listarEntidad({ entidad: "duenos" });
+    let [mascota, veterinaria, dueno] = await Promise.all([
+      mascotasPromise,
+      veterinariasPromise,
+      duenosPromise,
+    ]);
+    mascota = mascota.map((_mascota, index) => ({
+      valor: index.toString(),
+      etiqueta: `${_mascota.nombre} (${_mascota.tipo})`,
+    }));
+    veterinaria = veterinaria.map((_veterinaria, index) => ({
+      valor: index.toString(),
+      etiqueta: `${_veterinaria.nombre} ${_veterinaria.apellido}`,
+    }));
+    dueno = dueno.map((_dueno, index) => ({
+      valor: index.toString(),
+      etiqueta: `${_dueno.nombre} ${_dueno.apellido}`,
+    }));
+    const nuevasOpciones = { ...options, mascota, veterinaria, dueno };
+    this.setState({ objeto, idObjeto: index, options: nuevasOpciones }, () => {
       this.cambiarModal(null, "PUT");
     });
   };
@@ -75,7 +121,7 @@ class Pagina extends Component {
   //render = interpreta el código para mostrar
   render() {
     const { titulo = "Página sin título", entidad } = this.props;
-    const { columnas, idObjeto, entidades, objeto } = this.state;
+    const { columnas, idObjeto, entidades, objeto, options } = this.state;
     return (
       <>
         <div className="container">
@@ -100,6 +146,7 @@ class Pagina extends Component {
                   nombreCampo={columna}
                   manejarInput={this.manejarInput}
                   objeto={objeto}
+                  options={options}
                 />
               ))}
             </Modal>
