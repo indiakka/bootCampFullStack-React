@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ActionMenu from "./componentes/ActionsMenu";
+import ActionsMenu from "./componentes/ActionsMenu";
 import Tabla from "./componentes/Tabla";
 import Modal from "./componentes/Modal";
 import {
@@ -14,7 +14,7 @@ const opcionesIniciales = {
   tipo: [
     { valor: "Perro", etiqueta: "Perro" },
     { valor: "Gato", etiqueta: "Gato" },
-    { valor: "Pajaro", etiqueta: "Pajaro" },
+    { valor: "Pájaro", etiqueta: "Pájaro" },
     { valor: "Otro", etiqueta: "Otro" },
   ],
   diagnostico: [
@@ -24,13 +24,16 @@ const opcionesIniciales = {
     { valor: "Parvovirus", etiqueta: "Parvovirus" },
     { valor: "Aspergilosis", etiqueta: "Aspergilosis" },
   ],
+  mascota: [],
+  veterinaria: [],
+  dueno: [],
 };
 
 class Pagina extends Component {
   constructor(props) {
     super(props); //llama a todos los métodos del componente
     this.state = {
-      mostarModal: false,
+      mostraModal: false,
       entidades: [],
       objeto: {},
       idObjeto: null,
@@ -40,8 +43,13 @@ class Pagina extends Component {
     };
   }
 
-  cambiarModal = (_evento, method = "POST") => {
-    this.setState({ mostarModal: !this.state.mostarModal, method });
+  cambiarModal = (_evento, method = "POST", newState = {}) => {
+    const _newState = {
+      mostraModal: !this.state.mostraModal,
+      method,
+      ...newState,
+    };
+    this.obtenerOpcionesBackend(_newState);
   };
 
   listar = async () => {
@@ -70,18 +78,12 @@ class Pagina extends Component {
     this.cambiarModal();
     this.listar();
   };
-
-  editarEntidad = async (_evento, index) => {
-    const { entidad } = this.props;
+  obtenerOpcionesBackend = async (newState) => {
     const { options } = this.state;
-    const objeto = await obtenerUno({ entidad, idObjeto: index });
-    /* no ponemos await en las anteriores porque habría que esperar 
-      a que se hagan una a una desde la 1ª. Para hacerlo todo al mismo tiempo
-      creamos el let siguiente  */
     const mascotasPromise = listarEntidad({ entidad: "mascotas" });
     const veterinariasPromise = listarEntidad({ entidad: "veterinarias" });
     const duenosPromise = listarEntidad({ entidad: "duenos" });
-    let [mascota, veterinaria, dueno] = await Promise.all([
+    let [mascota = [], veterinaria = [], dueno = []] = await Promise.all([
       mascotasPromise,
       veterinariasPromise,
       duenosPromise,
@@ -99,9 +101,15 @@ class Pagina extends Component {
       etiqueta: `${_dueno.nombre} ${_dueno.apellido}`,
     }));
     const nuevasOpciones = { ...options, mascota, veterinaria, dueno };
-    this.setState({ objeto, idObjeto: index, options: nuevasOpciones }, () => {
-      this.cambiarModal(null, "PUT");
-    });
+    console.log({ nuevasOpciones });
+    this.setState({ ...newState, options: nuevasOpciones });
+  };
+
+  editarEntidad = async (_evento, index) => {
+    const { entidad } = this.props;
+    const objeto = await obtenerUno({ entidad, idObjeto: index });
+    const newState = { objeto, idObjeto: index };
+    this.cambiarModal(null, "PUT", newState);
   };
 
   eliminarEntidad = async (_evento, index) => {
@@ -124,34 +132,32 @@ class Pagina extends Component {
     const { columnas, idObjeto, entidades, objeto, options } = this.state;
     return (
       <>
-        <div className="container">
-          <ActionMenu cambiarModal={this.cambiarModal} titulo={titulo} />
-          <Tabla
-            entidades={entidades}
-            editarEntidad={this.editarEntidad}
-            eliminarEntidad={this.eliminarEntidad}
-            columnas={columnas}
-          />
-          {this.state.mostarModal && (
-            <Modal
-              cambiarModal={this.cambiarModal}
-              manejarInput={this.manejarInput}
-              crearEntidad={this.crearEntidad}
-              entidad={entidad}
-              idObjeto={idObjeto}
-            >
-              {columnas.map((columna, index) => (
-                <ComponenteCampo
-                  key={index}
-                  nombreCampo={columna}
-                  manejarInput={this.manejarInput}
-                  objeto={objeto}
-                  options={options}
-                />
-              ))}
-            </Modal>
-          )}
-        </div>
+        <ActionsMenu cambiarModal={this.cambiarModal} titulo={titulo} />
+        <Tabla
+          entidades={entidades}
+          editarEntidad={this.editarEntidad}
+          eliminarEntidad={this.eliminarEntidad}
+          columnas={columnas}
+        />
+        {this.state.mostraModal && (
+          <Modal
+            cambiarModal={this.cambiarModal}
+            manejarInput={this.manejarInput}
+            crearEntidad={this.crearEntidad}
+            entidad={entidad}
+            idObjeto={idObjeto}
+          >
+            {columnas.map((columna, index) => (
+              <ComponenteCampo
+                key={index}
+                nombreCampo={columna}
+                manejarInput={this.manejarInput}
+                objeto={objeto}
+                options={options}
+              />
+            ))}
+          </Modal>
+        )}
       </>
     );
   }

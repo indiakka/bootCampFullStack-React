@@ -15,7 +15,7 @@ function ComponenteCampo({
     case "diagnostico":
     case "dueno":
       return (
-        <div className="form-row">
+        <div className="col">
           {options[nombreCampo].length > 0 ? (
             <Select
               nombreCampo={nombreCampo}
