@@ -44,11 +44,14 @@ class Pagina extends Component {
   }
 
   cambiarModal = (_evento, method = "POST", newState = {}) => {
-    const _newState = {
+    let _newState = {
       mostraModal: !this.state.mostraModal,
       method,
       ...newState,
     };
+    if (method === "POST") {
+      _newState = { ..._newState, idObjeto: null, objeto: {} };
+    }
     this.obtenerOpcionesBackend(_newState);
   };
 
@@ -71,12 +74,12 @@ class Pagina extends Component {
     this.setState({ objeto });
   }; //... copia de objeto del constructor
 
-  crearEntidad = async () => {
+  crearEntidad = async (_evento = null) => {
     const { entidad } = this.props;
     let { objeto, method, idObjeto } = this.state;
     await crearEditarEntidad({ entidad, objeto, method, idObjeto });
-    this.cambiarModal();
-    this.listar();
+    this.cambiarModal(_evento, "POST", { objeto: {}, idObjeto: null });
+    //this.listar();
   };
   obtenerOpcionesBackend = async (newState) => {
     const { options } = this.state;
